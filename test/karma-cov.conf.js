@@ -1,14 +1,10 @@
 module.exports = function (config) {
   config.set({
     browsers: ['Firefox'],
-    frameworks: ['browserify', 'mocha'],
+    frameworks: ['mocha'],
     reporters: ['mocha', 'coverage'],
-    preprocessors: { 'build/*.js': ['browserify'] },
-    browserify: {
-      debug: true,
-      transform: ['browserify-css', 'browserify-istanbul']
-    },
-    files: ['build/*.js'],
+    preprocessors: { 'build/bundle.js': ['coverage'] },
+    files: ['build/bundle.js'],
     coverageReporter: {
       reporters : [
         { 'type': 'text' },

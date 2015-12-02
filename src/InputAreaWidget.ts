@@ -4,7 +4,7 @@
 
 import * as CodeMirror from 'codemirror';
 
-import './InputAreaWidget.css';
+import 'codemirror/lib/codemirror.css';
 
 import 'codemirror/mode/meta';
 

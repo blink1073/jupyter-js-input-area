@@ -39,7 +39,7 @@
     "clean:test": "rimraf test/build && rimraf test/coverage",
     "clean": "npm run clean:lib && npm run clean:example && npm run clean:test",
     "build:src": "tsc --project src && node scripts/copycss.js",
-    "build:test": "tsc --project test/src",
+    "build:test": "tsc --project test/src && browserify -g browserify-css test/build/index.js -o test/build/bundle.js",
     "build:example": "tsc --project example",
     "build": "npm run build:src && npm run build:example && npm run build:test",
     "docs": "rimraf docs/api && typedoc --options scripts/tdoptions.json",
