@@ -14,6 +14,10 @@ import {
 } from 'phosphor-messaging';
 
 import {
+  Panel
+} from 'phosphor-panel';
+
+import {
   IChangedArgs
 } from 'phosphor-properties';
 
@@ -22,7 +26,7 @@ import {
 } from 'phosphor-signaling';
 
 import {
-  ResizeMessage, Widget, Panel
+  ResizeMessage, Widget
 } from 'phosphor-widget';
 
 import {
@@ -205,7 +209,7 @@ class InputAreaWidget extends Panel {
    * widget and detaching the old one.
    */
   updateTextEditor(editor: ITextEditorViewModel) {
-    this.children.assign([new CodeMirrorWidget(editor)]);
+    //this.children.assign([new CodeMirrorWidget(editor)]);
   }
 
   updateRendered(render: boolean) {

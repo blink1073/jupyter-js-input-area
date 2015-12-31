@@ -8,14 +8,16 @@
     "codemirror": "^5.9.0",
     "diff-match-patch": "^1.0.0",
     "phosphor-messaging": "^1.0.5",
+    "phosphor-panel": "^1.0.0-rc.1",
     "phosphor-properties": "^2.0.0",
     "phosphor-signaling": "^1.2.0",
     "phosphor-widget": "^1.0.0-beta.1"
   },
   "devDependencies": {
+    "css-loader": "^0.23.1",
     "es6-module-loader": "^0.17.8",
     "expect.js": "^0.3.1",
-    "istanbul": "^0.3.19",
+    "istanbul-instrumenter-loader": "^0.1.3",
     "karma": "^0.13.15",
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.3",
@@ -23,25 +25,24 @@
     "karma-ie-launcher": "^0.2.0",
     "karma-mocha": "^0.2.1",
     "karma-mocha-reporter": "^1.1.3",
-    "karma-systemjs": "^0.9.0",
+    "karma-webpack": "^1.7.0",
     "mocha": "^2.3.4",
     "nodemon": "^1.8.1",
     "rimraf": "^2.4.4",
-    "steal": "^0.12.3",
-    "system-css": "^0.1.0",
-    "systemjs": "^0.19.6",
-    "systemjs-plugin-json": "^0.1.0",
-    "typedoc": "^0.3.12",
-    "typescript": "^1.7.3"
+    "style-loader": "^0.13.0",
+    "ts-loader": "^0.7.2",
+    "typedoc": "^0.3.11",
+    "typescript": "^1.6.2",
+    "webpack": "^1.12.9"
   },
   "scripts": {
     "clean:lib": "rimraf lib",
-    "clean:example": "rimraf example/*.js example/*.map",
+    "clean:example": "rimraf example/bundle.js",
     "clean:test": "rimraf test/build && rimraf test/coverage",
     "clean": "npm run clean:lib && npm run clean:example && npm run clean:test",
     "build:src": "tsc --project src",
     "build:test": "tsc --project test/src",
-    "build:example": "tsc --project example",
+    "build:example": "webpack --config example/webpack.conf.js",
     "build": "npm run build:src && npm run build:example && npm run build:test",
     "docs": "rimraf docs/api && typedoc --options scripts/tdoptions.json",
     "postinstall": "npm dedupe",
@@ -63,11 +64,6 @@
     "lib/*.css",
     "lib/*.d.ts"
   ],
-  "system": {
-    "npmIgnore": [
-      "devDependencies"
-    ]
-  },
   "keywords": [
     "jupyter"
   ],

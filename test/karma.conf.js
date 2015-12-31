@@ -1,15 +1,20 @@
 module.exports = function (config) {
   config.set({
     basePath: '..',
-    frameworks: ['systemjs', 'mocha'],
-    files: ['test/build/*.js'],
+    frameworks: ['mocha'],
     reporters: ['mocha'],
-    systemjs: {
-      configFile: ['test/system.conf.js'],
-      serveFiles: [
-        'lib/*.*',
-        'node_modules/**/*.*',
-      ],
+    preprocessors: { 'test/src/*.ts': ['webpack'] },
+    files: ['test/src/*.ts'],
+    webpack: {
+      resolve: {
+        extensions: ['', '.ts', '.js']
+      },
+      module: {
+        loaders: [
+          { test: /\.ts$/, loader: 'ts-loader' },
+          { test: /\.css$/, loader: 'style-loader!css-loader' },
+        ]
+      }
     },
     port: 9876,
     colors: true,

@@ -1,24 +1,38 @@
+var path = require('path');
+
 module.exports = function (config) {
   config.set({
     basePath: '..',
     browsers: ['Firefox'],
-    frameworks: ['systemjs', 'mocha'],
+    frameworks: ['mocha'],
     reporters: ['mocha', 'coverage'],
-    preprocessors: { 'build/*.js': ['coverage'] },
-    files: ['test/build/*.js'],
+    preprocessors: { 'test/src/*.ts': ['webpack'] },
+    files: ['test/src/*.ts'],
+    webpack: {
+      resolve: {
+        extensions: ['', '.ts', '.js']
+      },
+      module: {
+        loaders: [
+          { test: /\.ts$/, loader: 'ts-loader' },
+          { test: /\.css$/, loader: 'style-loader!css-loader' },
+        ],
+        preLoaders: [
+          // instrument only testing sources with Istanbul
+          {
+            test: /\.js$/,
+            include: path.resolve('lib/'),
+            loader: 'istanbul-instrumenter'
+          }
+        ]
+      }
+    },
     coverageReporter: {
       reporters : [
         { 'type': 'text' },
-        { 'type': 'lcov', dir: 'coverage' },
-        { 'type': 'html', dir: 'coverage' }
+        { 'type': 'lcov', dir: 'test/coverage' },
+        { 'type': 'html', dir: 'test/coverage' }
       ]
-    },
-    systemjs: {
-      configFile: ['test/system.conf.js'],
-      serveFiles: [
-        'lib/*.*',
-        'node_modules/**/*.*',
-      ],
     },
     port: 9876,
     colors: true,
